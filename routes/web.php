@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('users', 'UsersController@index')->middleware('role:admin|pengajar')->name('users.index');
+Route::post('users/assignrole', 'UsersController@assignrole')->middleware('role:admin|pengajar')->name('users.assignrole');
 Route::get('/home', 'HomeController@index')->name('home');
