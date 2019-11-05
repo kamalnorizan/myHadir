@@ -18,4 +18,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //url = /api/login
-Route::post('/login', 'API\ApiLoginController@login');
+
+Route::group([
+    'prefix' => 'auth'
+], function () {
+    Route::post('login', 'API\ApiLoginController@login')->name('apilogin');
+    Route::group([
+        'middleware' => 'auth:api'
+    ], function () {
+        Route::get('logout', 'Auth\AuthController@logout');
+        Route::get('user', 'Auth\AuthController@user');
+    });
+});

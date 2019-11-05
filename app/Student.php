@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
@@ -20,5 +21,16 @@ class Student extends Model
     public function user()
     {
         return $this->morphOne('App\User', 'profileable');
+    }
+
+    public function checkndp($ndp)
+    {
+        $value = DB::table('students')->where('student_ndp', $ndp)->get();
+        if ($value->count() == 0) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

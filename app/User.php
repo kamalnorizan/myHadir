@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\DB;
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasRoles;
@@ -40,7 +40,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function profile()
+    public function profileable()
     {
         return $this->morphTo();
     }
@@ -49,4 +49,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Iljtm', 'iljtm_id', 'iljtm_id');
     }
+
 }
